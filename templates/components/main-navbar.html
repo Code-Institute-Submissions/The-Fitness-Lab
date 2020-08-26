@@ -1,86 +1,84 @@
-<div class="container-fluid fixed-top">
-    <div id="topnav" class="row pt-lg-2 d-none d-lg-flex bg-dark labnav">
-        <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-            <a href="{% url 'home' %}" class="nav-link main-logo-link bg-white ">
-                <h2 class="logo-font text-black my-0"><strong>The Lab</strong></h2>
-            </a>
-        </div>
-        <div class="col-12 col-lg-8   my-auto py-1 py-lg-0 justify-content-end">
-            <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-                <li class="list-inline-item">
-                    <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-                        <div class="text-center">
-                            <p class="my-0">Join</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-                        <div class="text-center">
-                            <p class="my-0">Shop</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-                        <div class="text-center">
-                            <p class="my-0">About</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
-                        <div class="text-center">
-                            <p class="my-0">contacts</p>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-inline-item dropdown">
-                    <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <div class="text-center">
-                            <div><i class="fas fa-user fa-lg"></i></div>
-                        </div>
-                    </a>
-                    <!-- The drop-down menu that opens uses several Django template tags -->
-                    <div class="dropdown-menu border-0" aria-labelledby="user-options">
-                        {% if request.user.is_authenticated %}
-                        <!-- user is authenticated and a superuser. -->
-                        {% if request.user.is_superuser %}
-                        <a href="" class="dropdown-item">Members Management</a>
-                        {% endif %}
-                        <!-- If the user is authenticated we want to display a drop-down item for their profile and a link to logout. -->
-                        <a href="" class="dropdown-item">My Profile</a>
-                        <!--  coming from the allauth URLs we included in the project level urls.py account_logout,account_signup and account_login -->
-                        <a href="" class="dropdown-item">Logout</a>
-                        {% else %}
-                        <!-- display the options to log in or register if they don't have an account. -->
-                        <a href="" class="dropdown-item">Register</a>
-                        <a href="" class="dropdown-item">Login</a>
-                        {% endif %}
+<div id="topnav" class="row pt-lg-2 d-none d-lg-flex bg-dark labnav">
+    <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
+        <a href="{% url 'home' %}" class="nav-link main-logo-link bg-white ">
+            <h2 class="logo-font text-black my-0"><strong>The Lab</strong></h2>
+        </a>
+    </div>
+    <div class="col-12 col-lg-8   my-auto py-1 py-lg-0 justify-content-end">
+        <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+            <li class="list-inline-item">
+                <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                    <div class="text-center">
+                        <p class="my-0">Join</p>
                     </div>
-                </li>
-                <li class="list-inline-item">
-                    <!-- template variable to determine which classes to apply to the element
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                    <div class="text-center">
+                        <p class="my-0">Shop</p>
+                    </div>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                    <div class="text-center">
+                        <p class="my-0">About</p>
+                    </div>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                    <div class="text-center">
+                        <p class="my-0">contacts</p>
+                    </div>
+                </a>
+            </li>
+            <li class="list-inline-item dropdown">
+                <a class="text-white nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <div class="text-center">
+                        <div><i class="fas fa-user fa-lg"></i></div>
+                    </div>
+                </a>
+                <!-- The drop-down menu that opens uses several Django template tags -->
+                <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                    {% if request.user.is_authenticated %}
+                    <!-- user is authenticated and a superuser. -->
+                    {% if request.user.is_superuser %}
+                    <a href="" class="dropdown-item">Members Management</a>
+                    {% endif %}
+                    <!-- If the user is authenticated we want to display a drop-down item for their profile and a link to logout. -->
+                    <a href="" class="dropdown-item">My Profile</a>
+                    <!--  coming from the allauth URLs we included in the project level urls.py account_logout,account_signup and account_login -->
+                    <a href="" class="dropdown-item">Logout</a>
+                    {% else %}
+                    <!-- display the options to log in or register if they don't have an account. -->
+                    <a href="" class="dropdown-item">Register</a>
+                    <a href="" class="dropdown-item">Login</a>
+                    {% endif %}
+                </div>
+            </li>
+            <li class="list-inline-item">
+                <!-- template variable to determine which classes to apply to the element
 So if there's something in the bag the font will be bold and a different colour. -->
-                    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-white{% endif %} nav-link"
-                        href="">
-                        <div class="text-center">
-                            <div><i class="fas fa-shopping-bag fa-lg"></i></div>
-                            <p class="my-0">
-                                <!-- we're checking whether this grand total template variable exists.
+                <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-white{% endif %} nav-link"
+                    href="">
+                    <div class="text-center">
+                        <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+                        <p class="my-0">
+                            <!-- we're checking whether this grand total template variable exists.
 And if it does then we want to display the total formatted to two decimal places.
 If not we'll just display 0. -->
-                                {% if grand_total %}
-                                ${{ grand_total|floatformat:2 }}
-                                {% else %}
-                                <!-- $0.00 -->
-                                {% endif %}
-                            </p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                            {% if grand_total %}
+                            ${{ grand_total|floatformat:2 }}
+                            {% else %}
+                            <!-- $0.00 -->
+                            {% endif %}
+                        </p>
+                    </div>
+                </a>
+            </li>
+        </ul>
     </div>
 </div>
