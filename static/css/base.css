@@ -33,22 +33,22 @@ html {
 .main-header {
     background: url('/static/images/home.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(90vh - 164px);
+    height: calc(85vh - 164px);
     min-height: 600px;
     color: #fff;
     position: relative;
 }
 
 .display-4 {
-    padding-top: 25rem;
+    padding-top: 18rem;
 
 }
 
 .box-row {
     position: absolute;
-    top: 30%;
+    top: 15%;
     bottom: 0;
-    left: 85%;
+    left: 50%;
     width: 100%;
     transform: translate(-50%, 50%);
     transition: transform .25s ease-in-out;
@@ -56,10 +56,6 @@ html {
 
 .end {
     justify-content: flex-end;
-}
-
-.box--yellow {
-    background-color: #fed710;
 }
 
 .box {
@@ -73,7 +69,7 @@ html {
     width: 230px;
     text-align: center;
     color: #333;
-    background-color: #d6d6d6;
+    background-color: #ffd90f;
     box-shadow: 0 30px 10px -20px rgba(0, 0, 0, .3);
     transition: background-color .25s ease-in-out, box-shadow .25s ease-in-out, transform .25s ease-in-out;
     cursor: pointer;
@@ -84,6 +80,32 @@ html {
     font-size: 2.5rem; */
     letter-spacing: .05em;
     text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+
+    .box-row {
+        margin-top: 35px;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .box-row {
+        margin: auto;
+        position: relative;
+        transform: translate(-50%, 10%);
+    }
+}
+
+@media (max-width: 500px) {
+    .box {
+        width: 100%;
+    }
+
+    .col-1-sm {
+        width: 100%;
+    }
 }
 
 /* from Bulma */
@@ -124,10 +146,6 @@ html {
     color: white;
 }
 
-.text-white {
-    color: #fff !important;
-}
-
 .text-black {
     color: #000 !important;
 }
@@ -147,20 +165,6 @@ html {
     border: 1px solid black;
 }
 
-/**
-* add that here at the top and then jump to base.css and add its CSS. It's going to be a 100% height and width div. Fixed at the top left of the screen.
-With the white background and a z-index of negative 1 to make sure that it sits behind all the content.
-**/
-
-.overlay {
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    position: fixed;
-    background: white;
-    z-index: -1;
-}
 
 a.category-badge>span.badge:hover {
     background: #212529 !important;
@@ -272,6 +276,10 @@ input[name='q']::placeholder {
         left: 0;
         z-index: 1030;
     }
+
+    .navbar-expand-lg {
+        padding: 0;
+    }
 }
 
 @media (max-width: 991px) {
@@ -367,6 +375,11 @@ input[name='q']::placeholder {
     border-radius: 0;
 }
 
+/* footer */
+
+footer {
+    margin-top: 20rem;
+}
 
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
