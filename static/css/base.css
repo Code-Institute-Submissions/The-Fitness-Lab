@@ -108,6 +108,21 @@ html {
     }
 }
 
+/* About */
+.letter-spacing {
+    letter-spacing: .25em;
+}
+
+.bg-color-light {
+    background-color: #fafafa;
+}
+
+@media (min-width: 751px) {
+    .section-about {
+        padding-top: 175px;
+    }
+}
+
 /* from Bulma */
 .icon {
     align-items: center;
