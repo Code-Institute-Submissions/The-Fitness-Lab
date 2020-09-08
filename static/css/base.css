@@ -38,12 +38,12 @@ html {
     background-color: #fff;
 }
 
-.bg-dark {
-    background: transparent !important;
+.bg-semidark {
+    background: rgba(0, 0, 0, 0.3);
     transition: 0.75s ease;
 }
 
-.bg-dark.scrolled {
+.bg-dark {
     background: #000 !important;
 }
 
@@ -206,7 +206,8 @@ a.category-badge>span.badge:hover {
     color: #fff !important;
 }
 
-.btt-button {
+.top-button {
+    display: none;
     height: 42px;
     width: 42px;
     position: fixed;
@@ -214,7 +215,7 @@ a.category-badge>span.badge:hover {
     right: 10px;
 }
 
-.btt-link,
+.go-top,
 .update-link,
 .remove-item {
     cursor: pointer;
