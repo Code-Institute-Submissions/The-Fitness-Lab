@@ -4,8 +4,11 @@ from django.db import models
 
 
 class Category(models.Model):
+    """
+    Model for categories
+    """
 
-    class Meta:  # fix the spelling issue on the category model by adding a special metaclass to the model itself.In the metaclass, i'll specify verbose name plural equals categories.
+    class Meta:
         verbose_name_plural = 'Categories'
 
     name = models.CharField(max_length=254)
@@ -18,8 +21,10 @@ class Category(models.Model):
         return self.friendly_name
 
 
-# each product requires a name, a description, and a price. But everything else is optional.
 class Product(models.Model):
+    """
+    Model for products
+    """
     category = models.ForeignKey(
         'Category', null=True, blank=True, on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
