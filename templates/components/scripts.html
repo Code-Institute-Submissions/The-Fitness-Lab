@@ -10,9 +10,15 @@
 <!-- Stripe -->
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            if (window.pageYOffset > 1000 - $(window).height()) {
+                $('#labNav').removeClass('bg-semidark').addClass('bg-dark');
+            } else {
+                $('#labNav').addClass('bg-semidark').removeClass('bg-dark');
+            }
+        });
 
-    $(window).scroll(function () {
-        $('labnav').toggleClass('scrolled', $(this).scrollTop() > 200);
+        $('.toast').toast('show');
     });
-    $('.toast').toast('show');
 </script>
