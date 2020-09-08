@@ -24,16 +24,16 @@
 
 <body>
     <header>
-        <div class="container-fluid fixed-top">
+        <div class="container-fluid fixed-top" id="labNav">
             {% include 'components/main-navbar.html' %}
             <div class="row">
-                <nav class="navbar navbar-expand-lg navbar-light w-100">
+                <nav class="navbar navbar-expand-lg navbar-light w-100 text-center">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav"
                         aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon text-white"></span>
                     </button>
                     {% include 'components/mobile-top-header.html' %}
-                    {% include 'components/main-nav.html' %}
+                    {% include 'components/mobile-main-navbar.html' %}
                 </nav>
             </div>
         </div>
@@ -71,6 +71,7 @@
 
     {% include 'components/footer.html' %}
     {% include 'components/scripts.html' %}
+
 
 </body>
 
