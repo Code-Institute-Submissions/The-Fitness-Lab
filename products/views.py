@@ -13,32 +13,27 @@ from .forms import ProductForm
 
 
 def all_products(request):
-    """ A view to show all products, including sorting and search queries """
+    """ renders all products, sorting and search queries on products page """
 
     products = Product.objects.all()
-    query = None
+    search = None
     categories = None
     sort = None
-    direction = None
+    sort_direction = None
 
     if request.GET:
-        if 'sort' in request.GET:  # To review this code, first we check whether sort is in request.get
-            # If it is. We set it equal to both sort which will be none at this point. And sortkey
+        if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
             if sortkey == 'name':
-                # Then we rename sortkey to lower_name In the event, the user is sorting by name.
                 sortkey = 'lower_name'
-                # Then we annotate the current list of products with a new field.
                 products = products.annotate(lower_name=Lower('name'))
             if sortkey == 'category':
                 sortkey = 'category__name'
             if 'direction' in request.GET:
-                direction = request.GET['direction']
-                # And check whether the direction is descending in order to decide whether to reverse the order.
-                if direction == 'desc':
+                sort_direction = request.GET['direction']
+                if sort_direction == 'desc':
                     sortkey = f'-{sortkey}'
-            # Finally in order to actually sort the products all we need to do is use the order by model method.
             products = products.order_by(sortkey)
 
         if 'category' in request.GET:
@@ -46,23 +41,22 @@ def all_products(request):
             products = products.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
 
-        if 'q' in request.GET:
-            query = request.GET['q']
-            if not query:
+        if 'search' in request.GET:
+            search = request.GET['search']
+            if not search:
                 messages.error(
                     request, "You didn't enter any search criteria!")
                 return redirect(reverse('products'))
 
-            queries = Q(name__icontains=query) | Q(
-                description__icontains=query)
+            queries = Q(name__icontains=search) | Q(
+                description__icontains=search)
             products = products.filter(queries)
 
-    # return the current sorting methodology to the template.
-    current_sorting = f'{sort}_{direction}'
+    current_sorting = f'{sort}_{sort_direction}'
 
     context = {
         'products': products,
-        'search_term': query,
+        'search_label': search,
         'categories_info': categories,
         'current_sorting': current_sorting,
     }
@@ -71,7 +65,7 @@ def all_products(request):
 
 
 def product_detail(request, product_id):
-    """ A view to show individual product details """
+    """ Renders the product details """
 
     product = get_object_or_404(Product, pk=product_id)
 
