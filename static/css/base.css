@@ -193,13 +193,20 @@ html {
     background-color: #ffd90f !important;
 }
 
-.border-black {
-    border: 1px solid black !important;
-}
-
 .bg-orange {
     background-color: #ff7f00 !important;
 }
+
+.border-black {
+    border: 2px solid black !important;
+}
+
+.border-yellow {
+    border: 2px solid #ffd90f !important;
+    background: #000;
+    color: #fff;
+}
+
 
 .btn-outline-black {
     background: white;
@@ -217,6 +224,8 @@ html {
     position: fixed;
     bottom: 10px;
     right: 10px;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 1);
+    border-radius: 20px;
 }
 
 .go-top,
@@ -656,7 +665,7 @@ input[name='q']::placeholder {
 }
 
 .categories-item:hover {
-    background-color: #000;
+    background-color: #000 !important;
     color: #fff;
 }
 
@@ -675,6 +684,13 @@ input[name='q']::placeholder {
     .sort-select-wrapper {
         width: auto !important;
     }
+}
+
+/* Product Detail */
+
+.add-btn:hover {
+    background-color: #ff7f00 !important;
+    color: #fff;
 }
 
 /* Product Form */
@@ -721,8 +737,22 @@ input[name='q']::placeholder {
 /* footer */
 
 footer {
-    margin-top: 20rem;
+    background-color: #000000;
+
+    color: #ffd90f;
+    text-decoration: none;
 }
+
+footer ul {
+    list-style: none;
+    text-align: left;
+}
+
+footer ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
 
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
