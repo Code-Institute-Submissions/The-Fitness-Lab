@@ -144,7 +144,7 @@ html {
 }
 
 /* from Bulma */
-.icon {
+.search-icon {
     align-items: center;
     display: inline-flex;
     justify-content: center;
@@ -185,6 +185,14 @@ html {
     color: #000 !important;
 }
 
+.text-yellow {
+    color: #ffd90f !important;
+}
+
+.bg-yellow {
+    background-color: #ffd90f !important;
+}
+
 .border-black {
     border: 1px solid black !important;
 }
@@ -201,10 +209,6 @@ html {
 }
 
 
-a.category-badge>span.badge:hover {
-    background: #212529 !important;
-    color: #fff !important;
-}
 
 .top-button {
     display: none;
@@ -637,6 +641,40 @@ input[name='q']::placeholder {
     line-height: 30px;
     font-weight: 700;
     letter-spacing: .4px;
+}
+
+/* Products */
+
+.shop-title {
+    margin-top: 5rem;
+}
+
+.categories-item {
+    color: #000;
+    transition: 0.2s;
+    text-transform: uppercase;
+}
+
+.categories-item:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.category-info span {
+    padding: .5rem;
+    color: #000000;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    border: 1px solid;
+    background-color: rgba(255, 217, 15, 1);
+    box-shadow: 0 30px 10px -20px rgba(0, 0, 0, .8);
+}
+
+@media (max-width: 768px) and (min-width: 300px) {
+    .sort-select-wrapper {
+        width: auto !important;
+    }
 }
 
 /* Product Form */
