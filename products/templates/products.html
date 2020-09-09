@@ -4,66 +4,8 @@
 {% block content %}
 
 
-<div class="container-fluid bg-yellow mb-3 py-3">
+{% include 'components/banner-shop.html' %}
 
-    <!-- Title -->
-    <div class="shop-title col text-center mb-2">
-        <h2 class="text-uppercase">The Lab Shop</h2>
-        <hr class="w-50 mb-1">
-    </div>
-    <!-- End Title -->
-
-    <!-- Product Categories menu -->
-    <div class="categories my-1">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="categories-item font-weight-bold nav-link mx-2" href="{% url 'products' %}" id="product-link"
-                    type="button">
-                    All
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="categories-item  font-weight-bold nav-link mx-2"
-                    href="{% url 'products' %}?category=supplements" id="product-link" type="button">
-                    Supplements
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="categories-item  font-weight-bold nav-link mx-2"
-                    href="{% url 'products' %}?category=equipments" id="product-link" type="button">
-                    Equipments
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="categories-item  font-weight-bold nav-link mx-2"
-                    href="{% url 'products' %}?category=accessories" id="product-link" type="button">
-                    Accesories
-                </a>
-            </li>
-        </ul>
-
-        <!-- Product Search -->
-        <div class="border-0 w-100 p-3 rounded-0 my-0 d-md-none">
-            <form class="form" method="GET" action="{% url 'products' %}">
-                <div class="input-group w-100">
-                    <input class="form-control border border-black rounded-0" type="text" name="q"
-                        placeholder="Search our shop">
-                    <div class="input-group-append">
-                        <button class="form-control form-control btn btn-black border border-black rounded-0"
-                            type="submit">
-                            <span class="search-icon">
-                                <i class="fas fa-search"></i>
-                            </span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <!-- End Product Search -->
-
-    </div>
-    <!-- End Product Categories menu -->
-</div>
 <div class="row">
     <!-- Category Title -->
     {% for i in categories_info %}
