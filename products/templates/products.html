@@ -5,12 +5,15 @@
 
 
 <div class="container-fluid bg-yellow mb-3 py-3">
-    <div class="row">
-        <div class="shop-title col text-center mb-2">
-            <h2 class="text-uppercase">The Lab Shop</h2>
-            <hr class="w-50 mb-1">
-        </div>
+
+    <!-- Title -->
+    <div class="shop-title col text-center mb-2">
+        <h2 class="text-uppercase">The Lab Shop</h2>
+        <hr class="w-50 mb-1">
     </div>
+    <!-- End Title -->
+
+    <!-- Product Categories menu -->
     <div class="categories my-1">
         <ul class="nav justify-content-center">
             <li class="nav-item">
@@ -38,6 +41,8 @@
                 </a>
             </li>
         </ul>
+
+        <!-- Product Search -->
         <div class="border-0 w-100 p-3 rounded-0 my-0 d-md-none">
             <form class="form" method="GET" action="{% url 'products' %}">
                 <div class="input-group w-100">
@@ -54,11 +59,13 @@
                 </div>
             </form>
         </div>
+        <!-- End Product Search -->
+
     </div>
-
-
+    <!-- End Product Categories menu -->
 </div>
 <div class="row">
+    <!-- Category Title -->
     {% for i in categories_info %}
     <div class="col-12 text-center my-3">
         <a class="category-info text-decoration-none" href="{% url 'products' %}?category={{ c.name }}">
@@ -66,8 +73,12 @@
         </a>
     </div>
     {% endfor %}
+    <!-- End Category Title -->
+
+    <!-- Product Info -->
     <div class="product-container col-10 offset-1">
         <div class="row mt-1 mb-2">
+            <!-- Product item available -->
             <div class="col-6 col-md-6">
                 <p class="text-muted mt-3 text-center text-md-left">
                     {% if search_term or current_categories or current_sorting != 'None_None' %}
@@ -77,6 +88,9 @@
                     <strong>"{{ search_term }}"</strong>{% endif %}
                 </p>
             </div>
+            <!-- End Product item available -->
+
+            <!-- Product sorting -->
             <div class="col-6 col-md-6 my-auto d-flex justify-content-md-end">
                 <div class="sort-select-wrapper w-50">
                     <select id="sort-selector"
@@ -108,7 +122,10 @@
                     </select>
                 </div>
             </div>
+            <!-- End Product sorting -->
+
         </div>
+        <!-- Product Cards -->
         <div class="row">
             {% for product in products %}
             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -181,7 +198,9 @@
 
             {% endfor %}
         </div>
+        <!-- End Product Cards -->
     </div>
+    <!-- End Product Info -->
 </div>
 
 {% endblock %}
