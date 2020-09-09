@@ -10,9 +10,9 @@
     <!-- Category Title -->
     {% for i in categories_info %}
     <div class="col-12 text-center my-3">
-        <a class="category-info text-decoration-none" href="{% url 'products' %}?category={{ c.name }}">
+        <div class="category-info">
             <span>{{ i.friendly_name }}</span>
-        </a>
+        </div>
     </div>
     {% endfor %}
     <!-- End Category Title -->
@@ -23,11 +23,11 @@
             <!-- Product item available -->
             <div class="col-6 col-md-6">
                 <p class="text-muted mt-3 text-center text-md-left">
-                    {% if search_term or current_categories or current_sorting != 'None_None' %}
+                    {% if search_label or current_categories or current_sorting != 'None_None' %}
                     <span class="small"><a href="{% url 'products' %}">All Products</a> | </span>
                     {% endif %}
-                    {{ products|length }} Products{% if search_term %} found for
-                    <strong>"{{ search_term }}"</strong>{% endif %}
+                    {{ products|length }} Products{% if search_label %} found for
+                    <strong>"{{ search_label }}"</strong>{% endif %}
                 </p>
             </div>
             <!-- End Product item available -->
