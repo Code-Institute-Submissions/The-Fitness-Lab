@@ -204,7 +204,7 @@ html {
 .border-yellow {
     border: 2px solid #ffd90f !important;
     background: #000;
-    color: #fff;
+    color: #ffd90f;
 }
 
 
@@ -688,7 +688,8 @@ input[name='q']::placeholder {
 
 /* Product Detail */
 
-.add-btn:hover {
+.add-btn:hover,
+.check-btn:hover {
     background-color: #ff7f00 !important;
     color: #fff;
 }
