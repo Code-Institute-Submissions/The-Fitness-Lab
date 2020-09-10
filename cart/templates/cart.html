@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% include 'components/banner-shop.html' %}
+
+<div class="container mb-2">
+    <!-- Cart Page Title -->
+    <div class="row">
+        <div class="col">
+            <h2 class="my-4">Shopping Cart</h2>
+            <hr>
+        </div>
+    </div>
+    <!-- End Cart Page Title -->
+    <!-- Cart Container -->
+    {% if cart_items %}
+    <div class="cart-item">
+        <div class="row">
+            <!-- Cart Product Info -->
+            <div class="col-12 col-md-7 col-lg-7">
+                <h4 class="my-3">Product Info</h4>
+
+                {% for item in cart_items %}
+                <div class="row w-100">
+                    <div class="col-3">
+
+                        {% if item.product.image %}
+                        <img class="img-fluid rounded" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        {% else %}
+                        <img class="img-fluid rounded" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+                        {% endif %}
+
+                    </div>
+                    <div class="col-7">
+                        <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                        <p class="my-0"><strong>Size:
+                            </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}
+                        </p>
+                        <p class="my-0"><strong>Quantity:</strong> {{ item.quantity }}</p>
+
+                    </div>
+                    <div class="col-2">
+                        <p class="my-0">€{{ item.product.price }}</p>
+                    </div>
+                </div>
+                <hr>
+                {% endfor %}
+
+            </div>
+            <!-- End Cart Product Info -->
+            <!-- Product Total -->
+            <div class="col-12 col-md-5 col-lg-5">
+                <h4 class="my-3">Summary</h4>
+                <h6><strong>Subtotal: €{{ total|floatformat:2 }}</strong></h6>
+                <h6>Delivery: €0.00</h6>
+                <hr>
+                <h4 class="mt-4"><strong>Grand Total: €{{ total}}</strong></h4>
+                <hr>
+                <div class="checkout-btn">
+                    <div class="row no-gutters">
+                        <div class="col-12 col-lg-6 p-1 text-center">
+                            <a href="{% url 'products' %}" class="btn border-yellow rounded-0 m-auto">
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="text-uppercase">Keep Shopping</span>
+                            </a>
+                        </div>
+                        <div class="col-12 col-lg-6 p-1 text-center">
+                            <a href="{% url 'products' %}"
+                                class="check-btn btn bg-yellow border-black rounded-0 m-auto">
+                                <span class="text-uppercase">Checkout</span>
+                                <span class="icon">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Product Total -->
+        </div>
+    </div>
+    <!-- Cart Empty -->
+    {% else %}
+    <p class="lead mb-5">Your bag is empty.</p>
+    <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+        <span class="icon">
+            <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="text-uppercase">Keep Shopping</span>
+    </a>
+    {% endif %}
+    <!-- End Cart Container -->
+</div>
+
+{% endblock %}
