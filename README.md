@@ -11,7 +11,7 @@ Thank you for visiting my Github page. I hope you enjoy reading about the projec
 
 ## Contents:
 
-* [Muscle Farm](#the-lab)
+* [The Lab](#the-lab)
 * [UX (User Experience)](#ux-user-experience)
     * [Project Goals](#project-goals)
         * [Target Audience Goals](#target-audience-goals)
@@ -91,7 +91,7 @@ As a gym member user:
 * <em>"As a user, I want a gym with a full functionality where you can buy gym gears and train without any hassle to look for a separate shops."</em>
 
 #### Mr. Coleman: 
-* <em>"As user and a very busy person, I want  a website that I can navigate easily while im on the move."</em>
+* <em>"As user and a very busy person, I want a website that I can navigate easily to book for gym classes while im on the move."</em>
 
 #### Ms. Cutler: 
 * <em>"As a user and a personal trainer, I wanted to share my knowledge on training videos I can post on the website."</em>
