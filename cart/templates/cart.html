@@ -33,7 +33,9 @@
 
                     </div>
                     <div class="col-7">
-                        <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                        <a href="{% url 'product_detail' item.product.id %}" class="text-black text-decoration-none">
+                            <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                        </a>
                         <p class="my-0"><strong>Size:
                             </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}
                         </p>
@@ -66,27 +68,22 @@
                 <h6><strong>Subtotal: €{{ total|floatformat:2 }}</strong></h6>
                 <h6>Delivery: €0.00</h6>
                 <hr>
-                <h4 class="mt-4"><strong>Grand Total: €{{ total}}</strong></h4>
+                <h4 class="mt-4"><strong>Grand Total: €{{ total|floatformat:2 }}</strong></h4>
                 <hr>
                 <div class="checkout-btn">
-                    <div class="row no-gutters">
-                        <div class="col-12 col-lg-6 p-1 text-center">
-                            <a href="{% url 'products' %}" class="btn border-yellow rounded-0 m-auto">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="text-uppercase">Keep Shopping</span>
-                            </a>
-                        </div>
-                        <div class="col-12 col-lg-6 p-1 text-center">
-                            <a href="{% url 'products' %}"
-                                class="check-btn btn bg-yellow border-black rounded-0 m-auto">
-                                <span class="text-uppercase">Checkout</span>
-                                <span class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </a>
-                        </div>
+                    <div class="col{% if s %}-12 mt-2{% endif %}">
+                        <a href="{% url 'products' %}" class="check-btn btn border-yellow rounded-0 mt-2">
+                            <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="text-uppercase">Keep Shopping</span>
+                        </a>
+                        <a href="{% url 'products' %}" class="check-btn btn bg-yellow border-black rounded-0  mt-2">
+                            <span class="text-uppercase">Checkout</span>
+                            <span class="icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>
