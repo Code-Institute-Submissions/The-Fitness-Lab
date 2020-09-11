@@ -38,7 +38,18 @@
                             </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}
                         </p>
                         <p class="my-0"><strong>Quantity:</strong> {{ item.quantity }}</p>
-
+                        <form id="adjust-quantity" method="POST" class=""
+                            action="{% url 'adjust_cart' item.product.id %}">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <input class="" name="quantity" type="number" min="0" max="10"
+                                    value="{{ item.quantity }}">
+                                <div class="input-group-append">
+                                    <button id="update-qty" class="" type="submit">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                        <a href="{% url 'cart_remove' item.product.id %}"><small>Remove</small></a>
                     </div>
                     <div class="col-2">
                         <p class="my-0">€{{ item.product.price }}</p>
