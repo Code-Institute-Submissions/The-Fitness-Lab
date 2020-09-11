@@ -248,11 +248,12 @@ input[name='q']::placeholder {
     z-index: 99999999999;
 }
 
-.custom-toast {
+.toast-container {
     overflow: visible;
+    border: 5px solid;
 }
 
-.toast-capper {
+.toast-box {
     height: 2px;
 }
 
@@ -301,7 +302,7 @@ input[name='q']::placeholder {
     border-bottom-color: #343a40 !important;
 }
 
-.bag-notification-wrapper {
+.cart-notification-wrapper {
     height: 100px;
     overflow-x: hidden;
     overflow-y: auto;
