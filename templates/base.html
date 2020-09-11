@@ -37,11 +37,6 @@
                 </nav>
             </div>
         </div>
-        <!-- <div id="delivery-banner" class="row text-center">
-            <div class="col bg-orange text-white">
-                <h4 class="logo-font my-1">Join Now!</h4>
-            </div>
-        </div> -->
     </header>
     {% if messages %}
     <div class="message-container">
@@ -49,15 +44,15 @@
         {% with message.level as level %}
         {% if level == 40 %}
         <!-- In Django, a message of level 40 is an error. -->
-        {% include 'includes/toasts/toast_error.html' %}
+        {% include 'toasts/toast_error.html' %}
         {% elif level == 30 %}
         <!-- Level 30 is a warning. -->
-        {% include 'includes/toasts/toast_warning.html' %}
+        {% include 'toasts/toast_warning.html' %}
         {% elif level == 25 %}
         <!-- Level 25 is success. -->
-        <!--  % include 'includes/toasts/toast_success.html' % -->
+        {% include 'toasts/toast_success.html' %}
         {% else %}
-        <!-- % include 'includes/toasts/toast_info.html' % -->
+        {% include 'toasts/toast_info.html' %}
         {% endif %}
         {% endwith %}
         {% endfor %}
@@ -76,7 +71,6 @@
 
     {% include 'components/footer.html' %}
     {% include 'components/scripts.html' %}
-
 
 </body>
 
