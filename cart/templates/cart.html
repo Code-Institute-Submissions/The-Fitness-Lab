@@ -45,11 +45,11 @@
                                 <input class="" name="quantity" type="number" min="0" max="10"
                                     value="{{ item.quantity }}">
                                 <div class="input-group-append">
-                                    <button id="update-qty" class="" type="submit">Update</button>
+                                    <button id="update-qty" class="bg-orange" type="submit">Update</button>
                                 </div>
                             </div>
                         </form>
-                        <a href="{% url 'cart_remove' item.product.id %}"><small>Remove</small></a>
+                        <a href="{% url 'cart_remove' item.product.id %}" class="text-danger"><small>Remove</small></a>
                     </div>
                     <div class="col-2">
                         <p class="my-0">€{{ item.product.price }}</p>
