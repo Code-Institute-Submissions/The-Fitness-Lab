@@ -16,7 +16,7 @@ def cart_contents(request):
 
 def add_to_cart(request, id):
     """
-    Add a quantity of the specified product to the shopping bag
+    Add a quantity of the specified product to the shopping cart
     """
     product = get_object_or_404(Product, pk=id)
     quantity = int(request.POST.get('quantity'))
@@ -28,7 +28,7 @@ def add_to_cart(request, id):
             request, f'Updated {product.name} quantity to {cart[id]}')
     else:
         cart[id] = cart.get(id, quantity)
-        messages.success(request, f'Added {product.name} to your bag')
+        messages.success(request, f'Added {product.name} to your cart')
 
     request.session['cart'] = cart
     return redirect(redirect_url)
@@ -54,11 +54,12 @@ def adjust_cart(request, item_id):
 
 
 def cart_remove(request, item_id):
-    """Remove the item from the shopping bag"""
+    """Remove the item from the shopping cart"""
 
     product = get_object_or_404(Product, pk=item_id)
     cart = request.session.get('cart', {})
     cart.pop(item_id)
+    messages.success(request, f'Removed {product.name} from your cart')
 
     request.session['cart'] = cart
     return redirect(reverse('cart'))
