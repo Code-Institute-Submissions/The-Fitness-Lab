@@ -9,6 +9,8 @@ def cart_session(request):
     cart_items = []
     total = 0
     product_total = 0
+    quantity = 0
+    id = 0
     cart = request.session.get('cart', {})
 
     for id, quantity in cart.items():
@@ -25,6 +27,8 @@ def cart_session(request):
         'cart_items': cart_items,
         'total': total,
         'product_count': product_total,
+        'quantity': quantity,
+        'id': id,
     }
 
     return context
