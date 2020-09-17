@@ -36,22 +36,5 @@ class OrderForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+            self.fields[field].widget.attrs['class'] = 'stripe-checkout-input'
             self.fields[field].label = False
-
-
-class CheckoutForm(forms.Form):
-    """
-    Form for user to enter their card details to make a payment
-    """
-    MONTH_EXP = [(i, i) for i in range(1, 12)]
-    YEAR_EXP = [(i, i) for i in range(2018, 2040)]
-
-    card_number = forms.IntegerField(
-        label='Credit card number', required=False)
-    cvv = forms.IntegerField(label='Security code (CVV)', required=False)
-    expiry_month = forms.ChoiceField(
-        label='Month', choices=MONTH_EXP, required=False)
-    expiry_year = forms.ChoiceField(
-        label='Year', choices=YEAR_EXP, required=False)
-    stripe_id = forms.CharField(widget=forms.HiddenInput)
