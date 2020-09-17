@@ -47,6 +47,21 @@ html {
     background: #000 !important;
 }
 
+.shop-cart i.full {
+    font-size: 2rem;
+}
+
+.cart-count {
+    position: absolute;
+    z-index: 1;
+    color: #fff;
+    background: red;
+    padding: 1px 10px;
+    border-radius: 100%;
+    top: 40%;
+    right: 2%;
+}
+
 /*  home */
 
 .main-header {
