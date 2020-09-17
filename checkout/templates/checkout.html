@@ -112,13 +112,13 @@
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>
                 <div class="submit-button text-right mt-3 mb-2">
-                    <a href="{% url 'cart' %}" class="btn btn-outline-black rounded-0">
+                    <a href="{% url 'cart' %}" class="check-btn btn border-yellow rounded-0 mt-2">
                         <span class="icon">
                             <i class="fas fa-caret-left fa-lg"></i>
                         </span>
                         <span class="font-weight-bold">Order Review</span>
                     </a>
-                    <button id="buy_now_btn" class="btn btn-black rounded-0">
+                    <button id="buy_now_btn" class="check-btn btn bg-yellow border-black rounded-0  mt-2">
                         <span class="font-weight-bold">Secure Payment</span>
                         <span class="icon">
                             <i class="fas fa-lock"></i>
@@ -128,7 +128,7 @@
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>
                         </span>
-                        <span>Your card will be charged in <strong>€{{ grand_total|floatformat:2 }}</strong></span>
+                        <span>Your card will be charged in <strong>€{{ total|floatformat:2 }}</strong></span>
                     </p>
                 </div>
             </form>

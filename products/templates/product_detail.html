@@ -65,15 +65,13 @@
                             </p>
                         </div>
                         <div class="col{% if s %}-12 mt-2{% endif %}">
-                            <a href="{% url 'products' %}" class="btn border-yellow rounded-0 mt-2">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="text-uppercase">Back</span>
+                            <a href="{% url 'products' %}" class="check-btn btn border-yellow rounded-0 mt-2">
+                                <span class="text-uppercase"><i class="fas fa-caret-left fa-lg"></i>
+                                    Back</span>
                             </a>
                             <input type="submit"
                                 class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2"
-                                value="Add to Bag">
+                                value="Add to Cart">
                         </div>
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                         {% endwith %}
