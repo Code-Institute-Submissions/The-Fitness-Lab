@@ -61,24 +61,16 @@
             </li>
             <li class="list-inline-item">
 
-                <a class="{% if total %} text-orange font-weight-bold{% else %}text-white{% endif %} nav-link"
-                    href="{% url 'cart' %}">
+                <a class="shop-cart text-white nav-link" href="{% url 'cart' %}">
 
-
+                    {% if product_count > 0 %}
+                    <i class="fas fa-cart-arrow-down fa-lg full"></i>
+                    <label class="cart-count">{{ product_count }}</label>
+                    {% else %}
                     <div class="text-center">
                         <div><i class="fas fa-shopping-cart fa-lg"></i></div>
-                        <p class="my-0">
-                            {% if product_count > 0 %}
-                            <label class="main-nav__icon-nav__list__item__cart__counter">{{ product_count }}</label>
-                            {% endif %}
-                            {% if total %}
-                            <i class="fas fa-cart-arrow-down"></i>
-                            €{{ total|floatformat:2 }}
-                            {% else %}
-                            €0.00
-                            {% endif %}
-                        </p>
                     </div>
+                    {% endif %}
                 </a>
             </li>
         </ul>
