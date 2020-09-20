@@ -827,3 +827,12 @@ footer ul li a {
         padding: .25rem .5rem !important;
     }
 }
+
+/* Accounts */
+
+.accounts-header {
+    background: url('/static/images/loginpic.jpg') no-repeat center top fixed;
+    height: calc(70vh - 164px);
+    color: #fff;
+    position: relative;
+}
