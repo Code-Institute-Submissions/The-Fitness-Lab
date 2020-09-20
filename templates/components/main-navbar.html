@@ -44,18 +44,14 @@
                 <!-- The drop-down menu that opens uses several Django template tags -->
                 <div class="dropdown-menu border-0" aria-labelledby="user-options">
                     {% if request.user.is_authenticated %}
-                    <!-- user is authenticated and a superuser. -->
                     {% if request.user.is_superuser %}
                     <a href="" class="dropdown-item">Members Management</a>
                     {% endif %}
-                    <!-- If the user is authenticated we want to display a drop-down item for their profile and a link to logout. -->
-                    <a href="" class="dropdown-item">My Profile</a>
-                    <!--  coming from the allauth URLs we included in the project level urls.py account_logout,account_signup and account_login -->
-                    <a href="" class="dropdown-item">Logout</a>
+                    <a href="{% url 'user' %}" class="dropdown-item">My Profile</a>
+                    <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                     {% else %}
-                    <!-- display the options to log in or register if they don't have an account. -->
-                    <a href="" class="dropdown-item">Register</a>
-                    <a href="" class="dropdown-item">Login</a>
+                    <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+                    <a href="{% url 'account_login' %}" class="dropdown-item">Member Login</a>
                     {% endif %}
                 </div>
             </li>
