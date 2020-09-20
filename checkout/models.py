@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings
 
 from products.models import Product
+from accounts.models import UserAccount
 
 # Create your models here.
 
@@ -13,6 +14,11 @@ class Order(models.Model):
     Order model to create an order in the database
     """
     order_number = models.CharField(max_length=32, null=False, editable=False)
+    # blank=True so that users who don't have an
+    # account can still make purchases.
+    profile = models.ForeignKey(UserAccount, on_delete=models.SET_NULL,
+                                null=True, blank=False,
+                                related_name='orders')
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
