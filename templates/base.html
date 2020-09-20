@@ -5,20 +5,14 @@
 
 <head>
     {% include 'components/head.html' %}
-
     {% block extra_meta %}
     {% endblock %}
-
     {% block corecss %}
     {% endblock %}
-
     {% block extra_css %}
     {% endblock %}
-
-
     {% block extra_js %}
     {% endblock %}
-
     <title>The Lab{% block extra_title %}{% endblock %}</title>
 </head>
 
@@ -68,11 +62,10 @@
             </a>
         </div>
     </div>
-
     {% include 'components/footer.html' %}
     {% include 'components/scripts.html' %}
-
     {% block postloadjs %}
+    <script src="{% static 'js/scripts.js' %}"></script>
     {% endblock %}
 
 
