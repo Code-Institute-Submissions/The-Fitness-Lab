@@ -9,8 +9,7 @@ from checkout.models import Order
 
 def account_profile(request):
     """ Display the user's profile. """
-    #user = User.objects.get(email=request.user.email)
-    #username = User.objects.get(username=request.user.username)
+
     profile = get_object_or_404(UserAccount, user=request.user)
     if request.method == 'POST':
         form = ProfileForm(request.POST, instance=profile)
@@ -29,9 +28,7 @@ def account_profile(request):
         'form': form,
         'orders': orders,
         'profile': profile,
-        # 'user': user,
-        # 'username': username,
-        'on_profile_page': True
+        'only_profile': True
     }
 
     return render(request, template, context)
