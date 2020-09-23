@@ -1,17 +1,22 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 from django.conf import settings
+from decimal import Decimal
 
 from .forms import OrderForm
 from .models import Order, OrderItem
 from products.models import Product
-
+from accounts.models import UserAccount
+from accounts.forms import ProfileForm
 from cart.contexts import cart_session
+from django.db.models import Count
 
 import stripe
 import json
-# Create your views here.
 
 
 def thanks(request, order_number):
@@ -22,24 +27,50 @@ def thanks(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
-        profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
-        order.user_profile = profile
+        profile = UserAccount.objects.get(user=request.user)
+        order.profile = profile
         order.save()
 
         # Save the user's info
         if save_info:
             profile_data = {
-                'default_phone_number': order.phone_number,
-                'default_postcode': order.postcode,
-                'default_street_address1': order.street_address1,
-                'default_street_address2': order.street_address2,
-                'default_county': order.county,
+                'name': order.full_name,
+                'email': order.email,
+                'phone_number': order.phone_number,
+                'street_address1': order.street_address1,
+                'street_address2': order.street_address2,
+                'county': order.county,
+                'postcode': order.postcode,
             }
-            user_profile_form = UserProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+            profile_form = ProfileForm(profile_data, instance=profile)
+            if profile_form.is_valid():
+                profile_form.save()
 
+    # Shows the grand total of purchase in mail
+    items = order.lineitems.all()
+    for item in items:
+        grand_total = Decimal(0)
+        item_total = Decimal(0)
+
+        item_total += item.product.price * item.quantity
+        grand_total += int(item_total + item_total)
+        print(grand_total)
+
+    # Sends confirmation email to the customer
+    cust_email = order.email
+    subject = render_to_string(
+        'confirmation_email_subject.txt',
+        {'order': order})
+    body = render_to_string(
+        'confirmation_email.txt',
+        {'order': order, 'grand_total': grand_total, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+
+    send_mail(
+        subject,
+        body,
+        settings.DEFAULT_FROM_EMAIL,
+        [cust_email]
+    )
     messages.success(request, f'Payment Succesful!')
 
     if 'cart' in request.session:
@@ -48,11 +79,13 @@ def thanks(request, order_number):
     template = 'thanks.html'
     context = {
         'order': order,
+        'grand_total': grand_total,
     }
 
     return render(request, template, context)
 
 
+@login_required
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -68,9 +101,9 @@ def checkout(request):
             'street_address2': request.POST['street_address2'],
             'county': request.POST['county'],
         }
-        order_form = OrderForm(form_data)
-        if order_form.is_valid():
-            order = order_form.save(commit=False)
+        profile_order_form = OrderForm(form_data)
+        if profile_order_form.is_valid():
+            order = profile_order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
             order.original_cart = json.dumps(cart)
@@ -106,13 +139,27 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-    if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
-            Did you forget to set it in your environment?')
-    order_form = OrderForm()
+        # Autofill the billing info from the user profile
+        if request.user.is_authenticated:
+            try:
+                profile = UserAccount.objects.get(user=request.user)
+                profile_order_form = OrderForm(initial={
+                    'full_name': profile.name,
+                    'email': profile.email,
+                    'phone_number': profile.phone_number,
+                    'street_address1': profile.street_address1,
+                    'street_address2': profile.street_address2,
+                    'county': profile.county,
+                    'postcode': profile.postcode,
+                })
+            except UserAccount.DoesNotExist:
+                profile_order_form = OrderForm()
+        else:
+            profile_order_form = OrderForm()
+
     template = 'checkout.html'
     context = {
-        'order_form': order_form,
+        'profile_order_form': profile_order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
     }
