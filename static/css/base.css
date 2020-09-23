@@ -219,6 +219,11 @@ html {
     color: #ffd90f;
 }
 
+.border-yellow:hover {
+    border: 2px solid #ffd90f !important;
+    background: #ff7f00;
+    color: #fff;
+}
 
 .btn-outline-black {
     background: white;
@@ -835,4 +840,54 @@ footer ul li a {
     height: calc(70vh - 164px);
     color: #fff;
     position: relative;
+}
+
+/* user-profile */
+
+.profile-overlay {
+    background-color: black;
+    padding: 2.10rem;
+}
+
+.jumbotron {
+    background-size: cover;
+    background-color: #000;
+}
+
+.user-profile-header {
+    background: url('/static/images/stock.jpg') no-repeat center top fixed;
+    height: calc(50vh - 164px);
+    color: #fff;
+    position: relative;
+}
+
+#v-pills-tab a {
+    color: #000;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: #ffd90f !important;
+    background-color: #000;
+}
+
+@media (max-width: 500px) {
+
+    .profile-welcome {
+        font-size: 1.25rem;
+
+    }
+
+    .user-profile {
+        font-size: 1.5rem;
+
+    }
+
+    #v-pills-home h2 {
+        font-size: 1.5rem;
+    }
+
+    #v-pills-tab {
+        text-align: center;
+    }
 }
