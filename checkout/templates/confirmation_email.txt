@@ -1,0 +1,30 @@
+Hello {{ order.full_name }}!
+
+This is a confirmation of your order at The LAB.
+
+
+Order Details:
+
+    Order Number: {{ order.order_number }}
+    Order Date: {{ order.date }} 
+
+    {% for item in order.lineitems.all %}
+    {{ item.product.name }}
+    Quantity: {{ item.quantity }}
+    Price: €{{ item.product.price }}each
+    Item Total: €{{ item.lineitem_total | floatformat:2 }}
+    {% endfor %}
+
+    Grand Total: €{{ grand_total }}.00
+
+Your order will be shipped to {{ order.street_address1 }} {{ order.street_address1 }} in {{ order.county }}.
+
+We've got your phone number on file as {{ order.phone_number }}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Sincerely,
+
+The LAB
