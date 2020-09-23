@@ -5,7 +5,9 @@ from django.dispatch import receiver
 
 
 class UserAccount(models.Model):
-
+    """
+    Create the user profile model
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     email = models.CharField(max_length=200, null=True)
@@ -22,8 +24,8 @@ class UserAccount(models.Model):
 @receiver(post_save, sender=User)
 def save_user_account(sender, instance, created, **kwargs):
     """
-# Create or update the user profile
-"""
+    Create or update the user profile
+    """
     if created:
         UserAccount.objects.create(user=instance)
     # Existing users: just save the profile
