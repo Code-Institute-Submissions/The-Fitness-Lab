@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.db.models import Sum
 from django.conf import settings
 
 from products.models import Product
@@ -13,7 +14,7 @@ class Order(models.Model):
     """
     Order model to create an order in the database
     """
-    order_number = models.CharField(max_length=32, null=False, editable=False)
+    order_number = models.CharField(max_length=10, null=False, editable=False)
     # blank=True so that users who don't have an
     # account can still make purchases.
     profile = models.ForeignKey(UserAccount, on_delete=models.SET_NULL,
@@ -42,6 +43,14 @@ class Order(models.Model):
 
         """
         return uuid.uuid4().hex.upper()
+
+    def update_total(self):
+        """
+        Update grand total each time a line item is added
+        """
+        self.order_total = self.lineitems.aggregate(
+            Sum('lineitem_total'))['lineitem_total__sum']
+        self.save()
 
     def save(self, *args, **kwargs):
         """
