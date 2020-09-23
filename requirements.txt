@@ -4,6 +4,7 @@ autopep8==1.5.4
 certifi==2020.6.20
 chardet==3.0.4
 defusedxml==0.6.0
+dj-database-url==0.5.0
 Django==3.1
 django-allauth==0.42.0
 django-countries==6.1.3
@@ -14,6 +15,7 @@ lazy-object-proxy==1.4.3
 mccabe==0.6.1
 oauthlib==3.1.0
 Pillow==7.2.0
+psycopg2-binary==2.8.6
 pycodestyle==2.6.0
 pylint==2.6.0
 python3-openid==3.2.0
@@ -22,6 +24,7 @@ requests==2.24.0
 requests-oauthlib==1.3.0
 six==1.15.0
 sqlparse==0.3.1
+stripe==2.51.0
 toml==0.10.1
 urllib3==1.25.10
 wrapt==1.12.1
