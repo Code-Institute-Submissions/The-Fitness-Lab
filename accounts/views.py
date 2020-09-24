@@ -30,27 +30,28 @@ def account_profile(request):
     # show 5 products per page
     paginator = Paginator(orders, 5)
     page = request.GET.get('page')
-    try:
-        orders = paginator.page(page)
-    except PageNotAnInteger:
-        orders = paginator.page(1)
-    except EmptyPage:
-        orders = paginator.page(paginator.num_pages)
+    if orders:
+        try:
+            orders = paginator.page(page)
+        except PageNotAnInteger:
+            orders = paginator.page(1)
+        except EmptyPage:
+            orders = paginator.page(paginator.num_pages)
 
     # Show total of the product
     for order in orders:
         for item in order.lineitems.all():
             grand_total = Decimal(0)
             item_total = Decimal(0)
-        item_total += item.product.price * item.quantity
-        grand_total += int(item_total + item_total)
+            item_total += item.product.price * item.quantity
+            grand_total += int(item_total + item_total)
 
     template = 'user-profile.html'
     context = {
         'form': form,
         'orders': orders,
         'profile': profile,
-        'grand_total': grand_total,
+        # 'grand_total': grand_total,
         'only_profile': True,
 
     }
