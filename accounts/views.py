@@ -40,18 +40,20 @@ def account_profile(request):
 
     # Show total of the product
     for order in orders:
-        for item in order.lineitems.all():
-            grand_total = Decimal(0)
-            item_total = Decimal(0)
-            item_total += item.product.price * item.quantity
-            grand_total += int(item_total + item_total)
+        items = order.lineitems.all()
+        grand_total = Decimal(0)
+        for item in items:
+
+            item_total = Decimal(item.product.price * item.quantity)
+            grand_total += item_total
+            print(grand_total)
 
     template = 'user-profile.html'
     context = {
         'form': form,
         'orders': orders,
         'profile': profile,
-        # 'grand_total': grand_total,
+        'grand_total': grand_total,
         'only_profile': True,
 
     }

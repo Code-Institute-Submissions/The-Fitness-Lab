@@ -48,12 +48,11 @@ def thanks(request, order_number):
 
     # Shows the grand total of purchase in mail
     items = order.lineitems.all()
+    grand_total = Decimal(0)
     for item in items:
-        grand_total = Decimal(0)
-        item_total = Decimal(0)
 
-        item_total += item.product.price * item.quantity
-        grand_total += int(item_total + item_total)
+        item_total = Decimal(item.product.price * item.quantity)
+        grand_total += item_total
         print(grand_total)
 
     # Sends confirmation email to the customer
