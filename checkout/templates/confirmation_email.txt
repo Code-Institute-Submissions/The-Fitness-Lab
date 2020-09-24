@@ -15,7 +15,7 @@ Order Details:
     Item Total: €{{ item.lineitem_total | floatformat:2 }}
     {% endfor %}
 
-    Grand Total: €{{ grand_total }}.00
+    Grand Total: €{{ grand_total }}
 
 Your order will be shipped to {{ order.street_address1 }} {{ order.street_address1 }} in {{ order.county }}.
 
