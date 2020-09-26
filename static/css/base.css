@@ -891,3 +891,9 @@ footer ul li a {
         text-align: center;
     }
 }
+
+/* Membership detail */
+
+#startend-date p strong {
+    padding: 5px
+}
