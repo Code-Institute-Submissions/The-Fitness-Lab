@@ -27,26 +27,19 @@
 
     </div>
     <hr class="my-4">
+
     <div class="row text-center text-uppercase">
+        {% for membership in membership %}
         <div class="col-6">
-            <a type="button" href="" class="btn">
-                <h2 class="user-profile bg-yellow px-2">{{ monthly }}</h2>
+            <a href="{% url 'membership_detail' membership.id %}" class="btn">
+                <h2 class="user-profile bg-yellow px-2">{{ membership }}</h2>
             </a>
-            <h2 class="user-profile bg-yellow px-2">€{{ monthly.price }}</h2>
+            <h2 class="user-profile bg-yellow px-2">€{{ membership.price }}</h2>
             <a href="">
                 <img class="card-img-top img-fluid" src="{{ monthly }}" alt="">
             </a>
         </div>
-        <div class="col-6">
-            <a type="button" href="" class="btn">
-                <h2 class="user-profile bg-yellow px-2">{{ annually }}</h2>
-            </a>
-            <h2 class="user-profile bg-yellow px-2">€{{ annually.price }}</h2>
-            <a href="">
-                <img class="card-img-top img-fluid" src="{{ annually }}" alt="">
-            </a>
-        </div>
-
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
