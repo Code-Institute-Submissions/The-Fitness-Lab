@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Black bg for mobile screen size -->
+<div class="container-fluid d-lg-none w-100 p-0">
+    <div class="profile-overlay"></div>
+</div>
+<!-- Profile Image Banner -->
+<div class="jumbotron jumbotron-fluid text-center m-0 p-0 pt-lg-3" id="profile-banner">
+    <img class="img-fluid" src="{% static "images/profilepic3.jpg" %}" alt="">
+</div>
+
+<!-- Profile body -->
+<div class="container">
+    <!-- Profile Title -->
+    <div class="col-12 text-center text-uppercase my-4">
+        <h1 class="profile-welcome">the Lab BLOG!<br><span class="user-profile bg-yellow px-2">{{user.username}}</span>
+        </h1>
+    </div>
+    <hr class="my-4">
+    <!-- Nav tabs -->
+    {{ post }}
+    <!-- End Nav tabs -->
+</div>
+{% endblock %}
