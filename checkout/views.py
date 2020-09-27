@@ -18,7 +18,14 @@ from django.db.models import Count
 import stripe
 import json
 
+from django.utils.dateparse import parse_date
+from datetime import datetime, timedelta
+import datetime
 
+from membership.models import Membership, UserMembership
+
+
+@login_required
 def thanks(request, order_number):
     """
     Renders successfull payments in checkout
@@ -161,6 +168,75 @@ def checkout(request):
         'profile_order_form': profile_order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+    }
+
+    return render(request, template, context)
+
+
+@login_required
+def membership_checkout(request, membership_id):
+
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+
+    membership = get_object_or_404(Membership, pk=membership_id)
+
+    date = None
+    exp_date = 0
+    if request.GET:
+
+        date_str = request.GET.get('date')
+        date = parse_date(date_str)
+        exp_date = date + timedelta(days=membership.duration_days)
+        mem_type = request.session.get('mem_type', {})
+        mem_type = membership.membership_type
+        request.session['mem_type'] = mem_type
+        member = request.session.get('member', {})
+        member = date.strftime('%m/%d/%Y')
+        member_exp_date = request.session.get('member_exp_date', {})
+        member_exp_date = exp_date.strftime('%m/%d/%Y')
+        request.session['member'] = member
+        request.session['member_exp_date'] = member_exp_date
+
+    if request.method == 'POST':
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        membership.stripe_pid = pid
+        return redirect(reverse('membership_success', args=[membership_id]))
+
+    stripe_total = round(membership.price * 100)
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total, currency=settings.STRIPE_CURRENCY,)
+
+    template = 'membership_checkout.html'
+    context = {
+        'membership': membership,
+        'date': date,
+        'exp_date': exp_date,
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+    }
+
+    return render(request, template, context,)
+
+
+@login_required
+def membership_success(request, membership_id):
+    membership = get_object_or_404(Membership, pk=membership_id)
+    profile = UserMembership.objects.all()
+    profile_name = profile[0]
+    price = membership.duration_days
+    date = request.session.get('member')
+    date = datetime.datetime.strptime(date, "%m/%d/%Y")
+    exp_date = date + timedelta(days=membership.duration_days)
+
+    template = 'thankyou.html'
+    context = {
+        'date': date,
+        'exp_date': exp_date,
+        'membership': membership,
+        'profile_name': profile_name,
+        'price': price,
     }
 
     return render(request, template, context)
