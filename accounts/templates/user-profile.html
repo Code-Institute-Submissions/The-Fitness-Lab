@@ -51,7 +51,19 @@
                 <!-- Membership Tab panels -->
                 <div class="tab-pane fade mx-md-5" id="v-pills-membership" role="tabpanel"
                     aria-labelledby="v-pills-membership-tab">
+                    <div class="col-12 w-90 mx-auto" id="startend-date">
+                        <p class="font-weight-bold">Membership Details</p>
+                        <p class="mt-3">Gym Subscription: <strong class="text-uppercase">{{ mem_type }}</strong>
+                        </p>
+                        <p class="mt-3">Membership Start <i class="fas fa-calendar-check text-success"></i> :
+                            <strong>{{ date|date:"M. d, Y" }}</strong>
+                        </p>
+                        <p class="mt-3">Membership Expiration <i class="fas fa-calendar-times text-danger"></i> :
+                            <strong>{{ exp|date:"M. d, Y" }}</strong>
+                        </p>
+                        </p>
 
+                    </div>
                 </div>
                 <!-- Edit Tab panels -->
                 <div class="tab-pane fade" id="v-pills-edit-profile" role="tabpanel"
