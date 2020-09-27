@@ -7,6 +7,8 @@ from .models import UserAccount
 from .forms import ProfileForm
 
 from checkout.models import Order
+from datetime import datetime, timedelta
+import datetime
 
 
 @login_required
@@ -48,6 +50,12 @@ def account_profile(request):
             grand_total += item_total
             print(grand_total)
 
+    mem_type = request.session.get('mem_type')
+    date = request.session.get('member')
+    exp = request.session.get('member_exp_date')
+    date = datetime.datetime.strptime(date, "%m/%d/%Y")
+    exp = datetime.datetime.strptime(exp, "%m/%d/%Y")
+
     template = 'user-profile.html'
     context = {
         'form': form,
@@ -55,6 +63,9 @@ def account_profile(request):
         'profile': profile,
         'grand_total': grand_total,
         'only_profile': True,
+        'date': date,
+        'exp': exp,
+        'mem_type': mem_type,
 
     }
 
