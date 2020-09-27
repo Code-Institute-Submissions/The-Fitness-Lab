@@ -897,3 +897,10 @@ footer ul li a {
 #startend-date p strong {
     padding: 5px
 }
+
+/* Membership checkout */
+
+.date-member form input {
+    border: 1px solid black;
+    padding: 5px;
+}
