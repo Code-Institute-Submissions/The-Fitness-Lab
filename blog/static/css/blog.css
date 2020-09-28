@@ -1,0 +1,22 @@
+#blog-title {
+    margin: 1rem;
+}
+
+.create_blog input {
+    padding: auto;
+    color: #32325d;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
+}
+
+.create_blog input:focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+#id_image {
+    width: 75%;
+}
