@@ -18,13 +18,45 @@
 <!-- Profile body -->
 <div class="container">
     <!-- Profile Title -->
+
     <div class="col-12 text-center text-uppercase my-4">
-        <h1 class="profile-welcome">the Lab BLOG!<br><span class="user-profile bg-yellow px-2">{{user.username}}</span>
+        <h1 class="profile-welcome">the Lab BLOG!<br>
+            {% if user.is_authenticated %}
+            <span class="user-profile bg-yellow px-2">{{user.username}}</span>
+            {% endif %}
         </h1>
+        <h2>{{ pk }}</h2>
     </div>
     <hr class="my-4">
     <!-- Nav tabs -->
-    {{ post }}
     <!-- End Nav tabs -->
+    <div class="row row-flex">
+        <a href=""></a>
+        {% for item in blog %}
+        <div class="col-12">
+            <div class="blog-wrapper">
+                <div class="blog-img" style="background-image: url('{{ MEDIA_URL }}{{ item.image }}')"></div>
+                <a href="{% url 'blog_details' item.id %}">
+                    <h3 id="blog-page-title">{{ item.title }}</h3>
+                </a>
+                <p class="blog-user">: {{ item.user }}</p>
+                <p class="blog-content">{{ item.content|truncatewords:44 }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- collapse comment -->
+
+
+
+        <div class="col-12">
+            <a class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2 float-right"
+                href="{% url 'create_blog' %}" role="button">add Post</a>
+
+            <a href="{% url 'home' %}" class="check-btn btn border-yellow rounded-0 mt-2 float-right  mx-2">
+                <span class="text-uppercase"><i class="fas fa-caret-left fa-lg"></i>
+                    Back</span>
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}
