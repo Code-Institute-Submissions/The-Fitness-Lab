@@ -17,45 +17,66 @@
 
 <!-- Profile body -->
 <div class="container">
-    <!-- Profile Title -->
 
-    <div class="col-12 text-center text-uppercase my-4">
-        <h1 class="profile-welcome">the Lab BLOG!<br>
+    <!-- blog Title -->
+    <div class="col-12 text-center text-uppercase my-5">
+        <h1 class="blog-welcome">the Lab Blog!<br>
             {% if user.is_authenticated %}
             <span class="user-profile bg-yellow px-2">{{user.username}}</span>
             {% endif %}
         </h1>
-        <h2>{{ pk }}</h2>
     </div>
-    <hr class="my-4">
-    <!-- Nav tabs -->
-    <!-- End Nav tabs -->
-    <div class="row row-flex">
-        <a href=""></a>
-        {% for item in blog %}
-        <div class="col-12">
-            <div class="blog-wrapper">
-                <div class="blog-img" style="background-image: url('{{ MEDIA_URL }}{{ item.image }}')"></div>
-                <a href="{% url 'blog_details' item.id %}">
-                    <h3 id="blog-page-title">{{ item.title }}</h3>
-                </a>
-                <p class="blog-user">: {{ item.user }}</p>
-                <p class="blog-content">{{ item.content|truncatewords:44 }}</p>
+
+
+    <div class="container">
+        <div class="row">
+            <!-- blogs -->
+            {% for item in blog %}
+            <div class="col-12">
+                <div class="card mb-3">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            {% if item.image %}
+                            <img class="card-img" src="{{ MEDIA_URL }}{{ item.image }}" alt="No Image">
+                            {% else %}
+                            <img class="card-img" src="{% static "images/thelab.jpg" %}" alt="No Image">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h3 class="card-title text-capitalize text-black">{{ item.title }}</h3>
+                                <hr>
+                                {% if item.creator %}
+                                <p class="blog-user"><i class="fas fa-user-edit"></i>
+                                    {{ item.creator }}</p>
+                                {% else %}
+                                <p class="card-title my-1"><i class="fas fa-user-edit"></i> {{ item.user }}</p>
+                                {% endif %}
+                                <p class="card-text my-3">{{ item.content|truncatewords:44 }}</p>
+
+                            </div>
+                            <div class="card-footer bg-transparent border-0 mx-3 px-3">
+                                <small class="text-muted bg-light" role="button">{{ item.published_date }}</small>
+                                <a class="add-btn btn bg-yellow border-black rounded-0 text-uppercase my-1 float-right"
+                                    href="{% url 'blog_details' item.id %}">READ MORE</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        {% endfor %}
-        <!-- collapse comment -->
+            {% endfor %}
+            <!-- End blogs -->
+            <!-- Blog Button -->
+            <div class="col-12">
+                <a class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2 float-right"
+                    href="{% url 'create_blog' %}" role="button">add Post</a>
 
-
-
-        <div class="col-12">
-            <a class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2 float-right"
-                href="{% url 'create_blog' %}" role="button">add Post</a>
-
-            <a href="{% url 'home' %}" class="check-btn btn border-yellow rounded-0 mt-2 float-right  mx-2">
-                <span class="text-uppercase"><i class="fas fa-caret-left fa-lg"></i>
-                    Back</span>
-            </a>
+                <a href="{% url 'home' %}" class="check-btn btn border-yellow rounded-0 mt-2 float-right  mx-2">
+                    <span class="text-uppercase"><i class="fas fa-caret-left fa-lg"></i>
+                        Back</span>
+                </a>
+            </div>
+            <!-- Blog Button -->
         </div>
     </div>
 </div>
