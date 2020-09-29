@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Black bg for mobile screen size -->
+<div class="container-fluid d-lg-none w-100 p-0">
+    <div class="profile-overlay"></div>
+</div>
+<!-- Profile Image Banner -->
+<div class="jumbotron jumbotron-fluid text-center m-0 p-0 pt-lg-3" id="profile-banner">
+    <img class="img-fluid" src="{% static "images/profilepic3.jpg" %}" alt="">
+</div>
+
+<!-- Profile body -->
+<div class="container">
+    <!-- Profile Title -->
+    <div class="col-12 text-center text-uppercase my-4">
+        <h1 class="profile-welcome">Speak Your Mind<br><span
+                class="user-profile bg-yellow px-2">{{user.username}}</span>
+        </h1>
+    </div>
+
+    <!-- Nav tabs -->
+    <!-- End Nav tabs -->
+    <section class="container panel-body-forum-details">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>{{ blog.title }}</h3>
+                <hr>
+                <p>{{ blog.content }}</p>
+                <p>{{ blog.user }}</p>
+                <br>
+            </div>
+            <div class="col-md-6">
+                <!-- If an image is added with the post, it will be displayed here -->
+                {% if blog.image %}
+                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ blog.image }}')"></div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p><span class="boldtext">Posted:</span> {{ blog.published_date }} </p>
+            </div>
+        </div>
+
+
+
+        {% if profile == blog.user %}
+        <a href="{% url 'edit_blog_post' blog.id %}" class="btn btn-outline-warning margin-bottom-30">
+            <h3>Edit Post</h3>
+        </a>
+
+
+
+
+
+        {% endif %}
+
+        <div class="container panel-body-forum-details">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if comments %}
+                    {% for comment in comments %}
+                    <p>{{ comment.created_date }}</p>
+                    <p>{{ comment.name }}</p>
+                    <p><b>{{ comment.content }}</b></p>
+                    <hr />
+                    {% endfor %}
+                    {% else %}
+                    <p>No comments added. Why not be the first!</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12">
+                <p>
+                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Leave a comment
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <h1>Your Comment</h1>
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="form-row pl-3 m-auto">
+                                <div class="form-group col-12">
+                                    {{ form.name|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-12 ">
+                                    {{ form.content|as_crispy_field }}
+                                </div>
+                                <div class="col-md-auto">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-info">Post Comment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% endblock %}
