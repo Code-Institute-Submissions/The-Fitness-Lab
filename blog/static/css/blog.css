@@ -21,3 +21,15 @@
 #id_image {
     width: 75%;
 }
+
+/* blog details */
+
+.blog-image {
+    width: 250px;
+    margin: auto;
+}
+
+.blog-comments {
+    width: 70%;
+    margin-top: 5rem;
+}
