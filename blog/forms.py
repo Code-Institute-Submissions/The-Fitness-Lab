@@ -5,12 +5,12 @@ from .models import Post, PostComment
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'image', 'published_date']
+        fields = ['user', 'title', 'content', 'image', 'published_date']
 
 
-class CommentPostForm(forms.ModelForm):
+class PostCommentForm(forms.ModelForm):
 
     class Meta:
 
         model = PostComment
-        fields = ['content']
+        fields = ['name', 'content']
