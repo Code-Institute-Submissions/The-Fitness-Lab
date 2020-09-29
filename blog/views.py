@@ -24,25 +24,25 @@ def create_blog(request):
     A view that allows us to create a blog post
     """
 
-      profile = get_object_or_404(UserAccount, user=request.user)
-       if request.method == 'POST':
-            form = CreatePostForm(request.POST, request.FILES)
-            blog = Post.objects.all()
-            if form.is_valid():
-                instance = form.save(commit=False)
-                instance.creator = request.user
-                instance.save()
-                return render(request, 'blog.html', {'blog': blog})
+    profile = get_object_or_404(UserAccount, user=request.user)
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST, request.FILES)
+        blog = Post.objects.all()
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.creator = request.user
+            instance.save()
+            return render(request, 'blog.html', {'blog': blog})
 
-        else:
-            form = CreatePostForm()
+    else:
+        form = CreatePostForm()
 
-        template = 'create_blog.html'
-        context = {
-            'form': form,
-            'profile': profile,
-        }
-        return render(request, template, context)
+    template = 'create_blog.html'
+    context = {
+        'form': form,
+        'profile': profile,
+    }
+    return render(request, template, context)
 
 
 @login_required
