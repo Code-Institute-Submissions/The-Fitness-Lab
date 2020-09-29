@@ -15,96 +15,103 @@
     <img class="img-fluid" src="{% static "images/profilepic3.jpg" %}" alt="">
 </div>
 
-<!-- Profile body -->
+<!-- Create blog body -->
 <div class="container">
-    <!-- Profile Title -->
-    <div class="col-12 text-center text-uppercase my-4">
-        <h1 class="profile-welcome">Speak Your Mind<br><span
-                class="user-profile bg-yellow px-2">{{user.username}}</span>
-        </h1>
+    <!-- blog Title -->
+    <div class="col-12 text-center text-uppercase my-5">
+        <h1 class="blog-title">{{ blog.title }}</h1>
     </div>
 
-    <!-- Nav tabs -->
-    <!-- End Nav tabs -->
-    <section class="container panel-body-forum-details">
-        <div class="row">
-            <div class="col-md-6">
-                <h3>{{ blog.title }}</h3>
-                <hr>
-                <p>{{ blog.content }}</p>
-                <p>{{ blog.user }}</p>
-                <br>
-            </div>
-            <div class="col-md-6">
-                <!-- If an image is added with the post, it will be displayed here -->
+    <!-- Main Blog Body -->
+    <div class="col-12 px-5">
+        <div class="card border-0">
+            <div class="blog-image my-3">
                 {% if blog.image %}
-                <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ blog.image }}')"></div>
+                <img class="card-img h-50 w-50" src="{{ MEDIA_URL }}{{ item.image }}" alt="No Image">
+                {% else %}
+                <img class="card-img" src="{% static "images/thelab.jpg" %}" alt="No Image">
                 {% endif %}
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <p><span class="boldtext">Posted:</span> {{ blog.published_date }} </p>
-            </div>
-        </div>
-
-
-
-        {% if profile == blog.user %}
-        <a href="{% url 'edit_blog_post' blog.id %}" class="btn btn-outline-warning margin-bottom-30">
-            <h3>Edit Post</h3>
-        </a>
-
-
-
-
-
-        {% endif %}
-
-        <div class="container panel-body-forum-details">
-            <div class="row">
-                <div class="col-md-12">
-                    {% if comments %}
-                    {% for comment in comments %}
-                    <p>{{ comment.created_date }}</p>
-                    <p>{{ comment.name }}</p>
-                    <p><b>{{ comment.content }}</b></p>
-                    <hr />
-                    {% endfor %}
-                    {% else %}
-                    <p>No comments added. Why not be the first!</p>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="col-12">
-                <p>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                        aria-expanded="false" aria-controls="collapseExample">
-                        Leave a comment
-                    </button>
+            <hr>
+            <div class="card-body">
+                {% if blog.creator %}
+                <p class="blog-user"><i class="fas fa-user-edit"></i>
+                    {{ blog.creator }}</p>
+                {% else %}
+                <p class="card-title my-1"><i class="fas fa-user-edit"></i> :
+                    <strong>{{ blog.user }}</strong>
                 </p>
-                <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        <h1>Your Comment</h1>
-                        <form action="" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
+                {% endif %}
+                <p class="card-text"><small class="text-muted">{{ blog.published_date }}</small></p>
+                {% if edit.exist %}
+                <p class="card-text my-5">{{ edit.content.value }}</p>
+                {% else %}
+                <p class="card-text my-5">{{ blog.content }}</p>
+                {% endif %}
+            </div>
+            <hr>
+        </div>
+    </div>
 
-                            <div class="form-row pl-3 m-auto">
-                                <div class="form-group col-12">
-                                    {{ form.name|as_crispy_field }}
-                                </div>
-                                <div class="form-group col-12 ">
-                                    {{ form.content|as_crispy_field }}
-                                </div>
-                                <div class="col-md-auto">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-info">Post Comment</button>
-                        </form>
+    <!-- Edit and Back buttons -->
+    <div class="col-12 mb-5 px-5">
+        <button class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2 float-left" type="button"
+            data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Leave a comment
+        </button>
+        {% if profile == blog.user %}
+        <a class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2 float-right"
+            href="{% url 'edit_blog_post' pk=blog.id %}" role="button">Edit Post</a>
+        {% endif %}
+        <a href="{% url 'blog' %}" class="check-btn btn border-yellow rounded-0 mt-2 float-right  mx-2">
+            <span class="text-uppercase"><i class="fas fa-caret-left fa-lg"></i>
+                Back</span>
+        </a>
+    </div>
+    <!-- Comments form -->
+    <div class="col-12 collapse my-3 border-0" id="collapseExample">
+        <div class="card card-body border-0">
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-row pl-3 m-auto">
+                    <div class="form-group col-12">
+                        {{ form.name|as_crispy_field }}
+                    </div>
+                    <div class="form-group col-12 ">
+                        {{ form.content|as_crispy_field }}
+                    </div>
+                    <div class="col-md-auto">
                     </div>
                 </div>
-            </div>
+                <button type="submit"
+                    class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2 float-right">Post
+                    Comment</button>
+            </form>
         </div>
+    </div>
+    <!-- Show comments card-->
+    <div class="col-12 blog-comments mx-auto p-0">
+        <div class="card border-0 m-auto w-100">
+            <div class="card-header border-0">Comments</div>
+            {% if comments %}
+            {% for comment in comments %}
+            <div class="card-body">
+                <p class="card-text"><i class="fas fa-user-edit"></i> : {{ comment.name }}</p>
+                <p class="card-text">{{ comment.content }}</p>
+                <p class="card-text">{{ comment.created_date }}</p>
+                <p class="card-text"></p>
+                <p class="card-text"></p>
+            </div>
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div class="card-body">
+                <h5 class="card-title">No comments added. Why not be the first!</h5>
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </div>
+
 
 {% endblock %}
