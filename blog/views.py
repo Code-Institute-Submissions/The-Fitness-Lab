@@ -65,7 +65,7 @@ def blog_details(request, post_id):
 
 
 @login_required
-def edit_comment_blog(request, pk=None):
+def edit_blog_post(request, pk=None):
     """ A view that allows us to add a comment to a post """
 
     post = get_object_or_404(Post, pk=pk)
