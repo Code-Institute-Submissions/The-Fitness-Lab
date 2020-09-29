@@ -10,25 +10,23 @@
 <div class="container-fluid d-lg-none w-100 p-0">
     <div class="profile-overlay"></div>
 </div>
-<!-- Profile Image Banner -->
+<!-- Blog Image Banner -->
 <div class="jumbotron jumbotron-fluid text-center m-0 p-0 pt-lg-3" id="profile-banner">
     <img class="img-fluid" src="{% static "images/profilepic3.jpg" %}" alt="">
 </div>
 
-<!-- Profile body -->
+<!-- edit blog body -->
 <div class="container">
-    <!-- Profile Title -->
+    <!-- blog Title -->
     <div class="col-12 text-center text-uppercase my-4">
         <h1 class="profile-welcome">Speak Your Mind<br><span
                 class="user-profile bg-yellow px-2">{{user.username}}</span>
         </h1>
     </div>
-
-    <!-- Nav tabs -->
-    <!-- End Nav tabs -->
+    <!-- edit blog form  -->
     <div class="create_blog">
-        <h2 id="blog-title">Create a Blog</h2>
-        <form class="blog-form" action="{% url 'create_blog' %}" method="POST" enctype="multipart/form-data">
+        <h2 id="blog-title">Edit Your Blog</h2>
+        <form class="blog-form" action="{% url 'blog_details' blog.id %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group col-12 mb-0">
                 {{ form.title|as_crispy_field }}
@@ -39,7 +37,7 @@
             </div>
             <div class="form-row pl-3 m-auto">
                 <div class="form-group col-12 col-md-4 mb-0">
-                    {{ form.user|as_crispy_field }}
+                    {{ form.creator|as_crispy_field }}
                 </div>
                 <div class="form-group col-12 col-md-4 mb-0">
                     {{ form.published_date|as_crispy_field }}
@@ -48,15 +46,13 @@
                     {{ form.image|as_crispy_field }}
                 </div>
             </div>
-
             <div class="col-12">
                 <input class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2 float-right"
-                    type="submit" value="Create">
+                    type="submit" value="Update" name="update" id='update'>
                 <a href="{% url 'blog' %}" class="check-btn btn border-yellow rounded-0 mt-2 float-right  mx-2">
                     <span class="text-uppercase"><i class="fas fa-caret-left fa-lg"></i>
                         Back</span>
                 </a>
-
             </div>
         </form>
 
