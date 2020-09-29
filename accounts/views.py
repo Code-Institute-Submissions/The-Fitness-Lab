@@ -40,6 +40,14 @@ def account_profile(request):
         except EmptyPage:
             orders = paginator.page(paginator.num_pages)
 
+    mem_type = request.session.get('mem_type')
+    date = request.session.get('member')
+    exp = request.session.get('member_exp_date')
+    if request.session == 'GET':
+        date = datetime.datetime.strptime(date, "%m/%d/%Y")
+        exp = datetime.datetime.strptime(exp, "%m/%d/%Y")
+
+    grand_total = Decimal(0)
     # Show total of the product
     for order in orders:
         items = order.lineitems.all()
@@ -49,12 +57,6 @@ def account_profile(request):
             item_total = Decimal(item.product.price * item.quantity)
             grand_total += item_total
             print(grand_total)
-
-    mem_type = request.session.get('mem_type')
-    date = request.session.get('member')
-    exp = request.session.get('member_exp_date')
-    date = datetime.datetime.strptime(date, "%m/%d/%Y")
-    exp = datetime.datetime.strptime(exp, "%m/%d/%Y")
 
     template = 'user-profile.html'
     context = {
