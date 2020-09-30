@@ -843,6 +843,10 @@ footer i {
 
     }
 
+    .navbar-nav {
+        background-color: #0000;
+    }
+
     .nav-link {
         padding: 0.15rem;
     }
