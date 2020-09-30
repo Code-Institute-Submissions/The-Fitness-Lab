@@ -26,16 +26,14 @@
     <!-- edit blog form  -->
     <div class="create_blog">
         <h2 id="blog-title">Edit Your Blog</h2>
-        <form class="blog-form" action="{% url 'blog_details' blog.id %}" method="POST" enctype="multipart/form-data">
+        <form class="blog-form" action="{% url 'edit_blog_post' blog.id %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group col-12 mb-0">
                 {{ form.title|as_crispy_field }}
             </div>
-
             <div class="form-group col-12 mb-0">
                 {{ form.content|as_crispy_field }}
             </div>
-
             <div class="col-12">
                 <input class="add-btn btn bg-yellow border-black rounded-0 text-uppercase mt-2 float-right"
                     type="submit" value="Update" name="update" id='update'>
