@@ -1,7 +1,7 @@
 <div id="topnav" class="row py-lg-2 d-none d-lg-flex bg-semidark">
     <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-        <a href="{% url 'home' %}" class="nav-link main-logo-link bg-white ">
-            <h2 class="logo-font text-black my-0"><strong>The Lab</strong></h2>
+        <a href="{% url 'home' %}" class="nav-link main-logo-link bg-white">
+            <h2 class="logo-font text-black my-0"><strong>The LAB</strong></h2>
         </a>
     </div>
     <div class="col-12 col-lg-8   my-auto py-1 py-lg-0 justify-content-end">
@@ -29,14 +29,14 @@
                 </a>
             </li>
             <li class="list-inline-item">
-                <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                <a class="text-white nav-link" href="#about" aria-haspopup="true" aria-expanded="false">
                     <div class="text-center">
                         <p class="my-0">About</p>
                     </div>
                 </a>
             </li>
             <li class="list-inline-item">
-                <a class="text-white nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                <a class="text-white nav-link" href="#contact" aria-haspopup="true" aria-expanded="false">
                     <div class="text-center">
                         <p class="my-0">Contacts</p>
                     </div>
@@ -52,9 +52,6 @@
                 <!-- The drop-down menu that opens uses several Django template tags -->
                 <div class="dropdown-menu border-0" aria-labelledby="user-options">
                     {% if request.user.is_authenticated %}
-                    {% if request.user.is_superuser %}
-                    <a href="" class="dropdown-item">Members Management</a>
-                    {% endif %}
                     <a href="{% url 'user' %}" class="dropdown-item">My Profile</a>
                     <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
                     {% else %}
