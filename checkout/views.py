@@ -223,8 +223,8 @@ def membership_checkout(request, membership_id):
 @login_required
 def membership_success(request, membership_id):
     membership = get_object_or_404(Membership, pk=membership_id)
-    profile = UserMembership.objects.all()
-    profile_name = profile[0]
+    profile = get_object_or_404(UserAccount, user=request.user)
+    profile_name = profile.name
     price = membership.duration_days
     date = request.session.get('member')
     date = datetime.datetime.strptime(date, "%m/%d/%Y")
