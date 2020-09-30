@@ -1,45 +1,48 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
-{% endblock %}
 
 {% block content %}
 <!-- Black bg for mobile screen size -->
 <div class="container-fluid d-lg-none w-100 p-0">
     <div class="profile-overlay"></div>
 </div>
-<!-- Profile Image Banner -->
+<!-- Member Image Banner -->
 <div class="jumbotron jumbotron-fluid text-center m-0 p-0 pt-lg-3" id="profile-banner">
-    <img class="img-fluid" src="{% static "images/profilepic3.jpg" %}" alt="">
+    <img class="img-fluid" src="{% static "images/getready.jpg" %}" alt="">
 </div>
 
-<!-- Profile body -->
+<!-- Membership body -->
 <div class="container">
     <!-- Membership Title -->
-    <div class="col-12 text-center text-uppercase my-4">
-
+    <div class="col-12 text-center text-uppercase my-5">
         <h1 class="profile-welcome">Membership Subcription<br>
-
         </h1>
-
-
     </div>
-    <hr class="my-4">
-
-    <div class="row text-center text-uppercase">
-        {% for membership in membership %}
-        <div class="col-6">
-            <a href="{% url 'membership_detail' membership.id %}" class="btn">
-                <h2 class="user-profile bg-yellow px-2">{{ membership }}</h2>
-            </a>
-            <h2 class="user-profile bg-yellow px-2">€{{ membership.price }}</h2>
-            <a href="">
-                <img class="card-img-top img-fluid" src="{{ monthly }}" alt="">
-            </a>
+    <!-- Membership card -->
+    <div class="card border-0">
+        <div class="row ">
+            <div class="col-6">
+                <img class="card-img-top" src="{% static "images/monthly.jpg" %}" alt="Card image cap">
+            </div>
+            <div class="col-6">
+                <img class="card-img-top" src="{% static "images/annual.jpg" %}" alt="Card image cap">
+            </div>
         </div>
-        {% endfor %}
+        <div class="card-body">
+            <div class="row text-center text-uppercase">
+                {% for membership in membership %}
+                <div class="col-6 mx-auto membership-option">
+                    <h3 class="mem-option rounded-0 text-uppercase mt-2 ">
+                        {{ membership }}</h3>
+                    <a href="{% url 'membership_detail' membership.id %}">
+                        <h5 class="mem-price add-btn btn bg-yellow border-black rounded-0 w-50 m-auto p-2">
+                            €{{ membership.price }}.00 JOIN NOW</h5>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
