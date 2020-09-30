@@ -8,14 +8,11 @@
     </a>
     <div class="dropdown-menu border-0" aria-labelledby="user-options">
         {% if request.user.is_authenticated %}
-        {% if request.user.is_superuser %}
-        <a href=""" class=" dropdown-item">Product Management</a>
-        {% endif %}
-        <a href="" class="dropdown-item">My Profile</a>
-        <a href="" class="dropdown-item">Logout</a>
+        <a href="{% url 'user' %}" class="dropdown-item">My Profile</a>
+        <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
         {% else %}
-        <a href="" class="dropdown-item">Register</a>
-        <a href="" class="dropdown-item">Login</a>
+        <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+        <a href="{% url 'account_login' %}" class="dropdown-item">Member Login</a>
         {% endif %}
     </div>
 </li>
@@ -24,8 +21,10 @@
         href="{% url 'cart' %}">
         <div class="text-center">
             {% if product_count > 0 %}
-            <i class="fas fa-2x fa-cart-arrow-down full"></i>
-            <label class="cart-count">{{ product_count }}</label>
+            <div class="text-center">
+                <i class="fas fa-2x fa-cart-arrow-down full"></i>
+                <label class="cart-count">{{ product_count }}</label>
+            </div>
             {% else %}
             <div class="text-center">
                 <div><i class="fas fa-2x fa-shopping-cart"></i></div>

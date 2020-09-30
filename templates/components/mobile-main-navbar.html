@@ -1,42 +1,34 @@
 <div class="collapse navbar-collapse" id="main-nav">
-    <ul class="navbar-nav w-auto mx-0 my-2 d-lg-none text-white">
+    <ul class="navbar-nav w-auto mx-0 my-2 d-lg-none text-white bg-semidark">
         <li class="nav-item d-block d-md-none">
-            <a class="logo-font font-weight-bold nav-link text-white mr-5" href="{% url 'home' %}" id="home-link">
-                Home
+            <a class="logo-font font-weight-bold nav-link text-white" href="{% url 'home' %}" id="home-link">
+                HOME
             </a>
         </li>
         <li class="nav-item d-block">
-            <a class="logo-font font-weight-bold nav-link text-white mr-5" href="{% url 'blog' %}" id="home-link">
+            <a class="logo-font font-weight-bold nav-link text-white" href="{% url 'blog' %}" id="home-link">
                 BLOG
             </a>
         </li>
         <li class="nav-item d-block">
-            <a class="logo-font font-weight-bold nav-link text-white mr-5" href="" id="home-link">
+            <a class="logo-font font-weight-bold nav-link text-white" href="{% url 'all_membership' %}" id="home-link">
                 MEMBERSHIP
             </a>
         </li>
         <li class="nav-item d-block">
-            <a class="logo-font font-weight-bold nav-link text-white mr-5" href="" id="home-link">
-                PROGRAMS
+            <a class="logo-font font-weight-bold nav-link text-white" href="{% url 'home' %}" id="home-link">
+                ABOUT
             </a>
         </li>
         <li class="nav-item d-block">
-            <a class="logo-font font-weight-bold nav-link text-white mr-5" href="" id="home-link">
+            <a class="logo-font font-weight-bold nav-link text-white" href="{% url 'home' %}" id="home-link">
                 CONTACTS
             </a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-white mr-5" href="{% url 'products' %}"
-                id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item d-block">
+            <a class="logo-font font-weight-bold nav-link text-white" href="{% url 'products' %}" id="home-link">
                 SHOP
             </a>
-            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="?sort=price&direction=asc" class="dropdown-item">By Price</a>
-                <a href="?sort=rating&direction=desc" class="dropdown-item ">By Rating</a>
-                <a href="?sort=category&direction=asc" class="dropdown-item ">By Category</a>
-                <a href="" class="dropdown-item">All Products</a>
-            </div>
         </li>
-
     </ul>
 </div>
