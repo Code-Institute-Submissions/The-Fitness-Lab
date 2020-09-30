@@ -47,15 +47,12 @@ def create_blog(request):
 
 @login_required
 def blog_details(request, post_id):
-    """ 
-    A view that allows us to view a specific blog post 
+    """
+    A view that allows us to view a specific blog post
     """
 
-    edit = CreatePostForm(request.POST, request.FILES)
     blog = get_object_or_404(Post, pk=post_id)
-    blog.save()
-    blog_user = blog.creator
-    comments = blog.postcomment.all()
+
     if request.method == 'POST':
         form = PostCommentForm(request.POST)
         if form.is_valid():
@@ -65,13 +62,13 @@ def blog_details(request, post_id):
 
     else:
         form = PostCommentForm()
+    comments = blog.postcomment.all()
     profile = get_object_or_404(UserAccount, user=request.user)
     context = {
-        'edit': edit,
+
         'blog': blog,
         'comments': comments,
         'form': form,
-        'blog_user': blog_user,
         'profile': profile,
     }
     return render(request, 'blog-details.html', context)
@@ -90,7 +87,6 @@ def edit_blog_post(request, pk):
         edit_form = EditPostForm(request.POST, request.FILES, instance=blog)
         if edit_form.is_valid():
             instance = edit_form.save(commit=False)
-            instance.creator = request.user
             instance.save()
             return redirect('blog_details', blog.id)
 
