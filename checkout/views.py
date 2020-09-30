@@ -2,13 +2,17 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpR
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils.dateparse import parse_date
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 from decimal import Decimal
+from datetime import datetime, timedelta
+import datetime
 
 from .forms import OrderForm
 from .models import Order, OrderItem
+from membership.models import Membership, UserMembership
 from products.models import Product
 from accounts.models import UserAccount
 from accounts.forms import ProfileForm
@@ -17,12 +21,6 @@ from django.db.models import Count
 
 import stripe
 import json
-
-from django.utils.dateparse import parse_date
-from datetime import datetime, timedelta
-import datetime
-
-from membership.models import Membership, UserMembership
 
 
 @login_required
@@ -175,6 +173,9 @@ def checkout(request):
 
 @login_required
 def membership_checkout(request, membership_id):
+    """ 
+    Renders membership checkout page 
+    """
 
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -222,6 +223,9 @@ def membership_checkout(request, membership_id):
 
 @login_required
 def membership_success(request, membership_id):
+    """
+    renders the view for membership success checkput  
+    """
     membership = get_object_or_404(Membership, pk=membership_id)
     profile = get_object_or_404(UserAccount, user=request.user)
     profile_name = profile.name

@@ -2,12 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.sessions.models import Session
+
 from decimal import Decimal
 from .models import UserAccount
 from .forms import ProfileForm
-from django.contrib.sessions.models import Session
-
 from checkout.models import Order
+
 from datetime import datetime, timedelta
 import datetime
 
