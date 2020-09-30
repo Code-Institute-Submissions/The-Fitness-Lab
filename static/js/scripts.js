@@ -14,14 +14,17 @@ $(document).ready(function () {
         }
     });
 
+    // Quick scroll back to top
     $('.go-top').click(function (e) {
         window.scrollTo(0, 0)
         $('#labNav').addClass('bg-semidark').removeClass('bg-dark');
         $('.top-button').hide();
-    })
+    });
 
+    // shows notification
     $('.toast').toast('show');
 
+    // sort products in all products page
     $('#sort-selector').change(function () {
         var selector = $(this);
         var currentUrl = new URL(window.location);
@@ -41,12 +44,13 @@ $(document).ready(function () {
 
             window.location.replace(currentUrl);
         }
-    })
+    });
 
+    // shows the tab at account profile
     $('#v-pills-tab a').on('click', function (e) {
         e.preventDefault()
         $(this).tab('show')
-    })
+    });
 
     //Tabs function not to jump on click in User-profile.html
     if (location.hash) {
