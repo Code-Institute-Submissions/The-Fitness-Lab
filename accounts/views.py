@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 from .models import UserAccount
 from .forms import ProfileForm
+from django.contrib.sessions.models import Session
 
 from checkout.models import Order
 from datetime import datetime, timedelta
@@ -40,12 +41,16 @@ def account_profile(request):
         except EmptyPage:
             orders = paginator.page(paginator.num_pages)
 
-    mem_type = request.session.get('mem_type')
     date = request.session.get('member')
+    mem_type = request.session.get('mem_type')
     exp = request.session.get('member_exp_date')
-    if request.session == 'GET':
+
+    if date and exp:
         date = datetime.datetime.strptime(date, "%m/%d/%Y")
         exp = datetime.datetime.strptime(exp, "%m/%d/%Y")
+    else:
+        date = None
+        exp = None
 
     grand_total = Decimal(0)
     # Show total of the product
@@ -53,10 +58,8 @@ def account_profile(request):
         items = order.lineitems.all()
         grand_total = Decimal(0)
         for item in items:
-
             item_total = Decimal(item.product.price * item.quantity)
             grand_total += item_total
-            print(grand_total)
 
     template = 'user-profile.html'
     context = {
