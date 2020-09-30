@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from .models import Post, PostComment
-from .forms import CreatePostForm, PostCommentForm, EditPostForm  # add before deployment
+from .forms import CreatePostForm, PostCommentForm, EditPostForm
 from accounts.models import UserAccount
 
 
@@ -87,7 +87,7 @@ def edit_blog_post(request, pk):
 
     if request.method == 'POST':
         blog = get_object_or_404(Post, id=pk)
-        edit_form = CreatePostForm(request.POST, request.FILES, instance=blog)
+        edit_form = EditPostForm(request.POST, request.FILES, instance=blog)
         if edit_form.is_valid():
             instance = edit_form.save(commit=False)
             instance.creator = request.user
@@ -97,7 +97,7 @@ def edit_blog_post(request, pk):
         else:
             return redirect('blog')
     else:
-        edit_form = CreatePostForm(request.POST, request.FILES, instance=blog)
+        edit_form = EditPostForm(request.POST, request.FILES, instance=blog)
 
     template = 'edit_blog.html'
     context = {
