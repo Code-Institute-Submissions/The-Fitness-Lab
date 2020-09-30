@@ -81,8 +81,13 @@
             </div>
         </div>
     </div>
-
 </div>
+<div id="loading-container">
+    <h1 class="logo-font loading-payment">
+        <span class="text-black">
+            <i class="fas fa-5x fa-dumbbell fa-spin"></i>
+        </span>
+    </h1>
 </div>
 
 
@@ -93,29 +98,4 @@
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="{% static 'js/stripe.js' %}"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        /* $("#date").datepicker({
-            autoclose: true,
-        }).on('changeDate', function (selected) {
-            var minDate = new Date(selected.date.valueOf());
-            $('#EndDate').datepicker('setStartDate', minDate);
-        });
- 
-        $("#EndDate").datepicker({
-            autoclose: true
-        }).on('changeDate', function (selected) {
-            var minDate = new Date(selected.date.valueOf());
-            $('#StartDate').datepicker('setEndDate', minDate);
-        }); */
-        /* $('#date').change(function (e) {
-            e.preventDefault();
-            $('#date-form').submit();
-        }); */
-        /* $('.button-date').click(function (e) {
-            $('.chosen-date').addClass('border-black');
-
-        }); */
-    });
-</script>
 {% endblock %}
