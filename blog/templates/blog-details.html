@@ -19,7 +19,11 @@
 <div class="container">
     <!-- blog Title -->
     <div class="col-12 text-center text-uppercase my-5">
+        {% if edit.exist %}
+        <h1 class="blog-title">{{ edit.title.value }}</h1>
+        {% else %}
         <h1 class="blog-title">{{ blog.title }}</h1>
+        {% endif %}
     </div>
 
     <!-- Main Blog Body -->
