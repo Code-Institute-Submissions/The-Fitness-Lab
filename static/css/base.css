@@ -34,6 +34,8 @@ html {
 }
 
 /*  navbar  */
+
+
 .navbar-toggler {
     background-color: #fff;
 }
@@ -73,6 +75,12 @@ html {
     position: relative;
 }
 
+.home-title {
+    color: #ffd90f;
+    font-weight: 700;
+    font-size: 4rem !important;
+}
+
 .display-4 {
     padding-top: 18rem;
 
@@ -109,7 +117,7 @@ html {
     cursor: pointer;
 }
 
-.box__text {
+.text-box {
     /* font-size: 40px;
     font-size: 2.5rem; */
     letter-spacing: .05em;
@@ -152,9 +160,14 @@ html {
 }
 
 @media (min-width: 751px) {
+
     .section-about {
         padding-top: 10rem;
         margin-bottom: 3rem;
+    }
+
+    .section-contact {
+        padding-top: 5rem;
     }
 }
 
@@ -772,6 +785,37 @@ footer ul li a {
     text-decoration: none;
 }
 
+footer .social-link {
+    display: block;
+    height: 2rem;
+    width: 2rem;
+    background-color: #ffd90f;
+    transition: background-color .15s ease-in-out;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, .1);
+    border: 3px solid #ffd90f;
+}
+
+footer i {
+    color: #000000;
+}
+
+.hover ul li:hover i {
+    -moz-transform: scale(1.5);
+    -webkit-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+    color: #4267B2;
+
+}
+
+.hover ul li:hover .github i {
+    color: black;
+}
+
+.hover ul li:hover .linkedin i {
+    color: #0e76a8;
+}
 
 /* fixed top navbar only on medium and up */
 @media (min-width: 992px) {
@@ -795,8 +839,8 @@ footer ul li a {
     }
 
     .display-4.logo-font.text-white {
-        padding-top: 25rem;
-        font-size: 2rem;
+        padding-top: 15rem;
+
     }
 
     .nav-link {
@@ -889,6 +933,23 @@ footer ul li a {
 
     #v-pills-tab {
         text-align: center;
+    }
+}
+
+/* membership */
+
+
+
+@media (max-width: 500px) {
+    .mem-price {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .mem-option {
+        margin-left: 5rem;
+        margin-right: 5rem;
     }
 }
 
